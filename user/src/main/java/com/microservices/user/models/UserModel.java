@@ -22,7 +22,7 @@ public class UserModel implements Serializable {
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AdressModel> addresses;
+    private List<AdressModel> address;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TelephoneModel> telephones;
@@ -62,12 +62,12 @@ public class UserModel implements Serializable {
         this.password = password;
     }
 
-    public List<AdressModel> getAddresses() {
-        return addresses;
+    public List<AdressModel> getAddress() {
+        return address;
     }
 
-    public void setAddresses(List<AdressModel> addresses) {
-        this.addresses = addresses;
+    public void setAddress(List<AdressModel> address) {
+        this.address = address;
     }
 
     public List<TelephoneModel> getTelephones() {

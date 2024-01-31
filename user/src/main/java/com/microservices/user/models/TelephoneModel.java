@@ -1,8 +1,6 @@
 package com.microservices.user.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "TB_Telephone")
@@ -13,6 +11,18 @@ public class TelephoneModel {
     private String number;
 
     private String ddd;
+
+    public UserModel getUser() {
+        return user;
+    }
+
+    public void setUser(UserModel user) {
+        this.user = user;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "User_id")
+    private UserModel user;
 
     public void setId(Long id) {
         this.id = id;
