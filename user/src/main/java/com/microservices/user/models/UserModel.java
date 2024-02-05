@@ -13,6 +13,7 @@ public class UserModel implements Serializable {
     private static final long UID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
@@ -22,7 +23,7 @@ public class UserModel implements Serializable {
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AdressModel> address;
+    private List<AddressModel> address;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TelephoneModel> telephones;
@@ -62,11 +63,11 @@ public class UserModel implements Serializable {
         this.password = password;
     }
 
-    public List<AdressModel> getAddress() {
+    public List<AddressModel> getAddress() {
         return address;
     }
 
-    public void setAddress(List<AdressModel> address) {
+    public void setAddress(List<AddressModel> address) {
         this.address = address;
     }
 

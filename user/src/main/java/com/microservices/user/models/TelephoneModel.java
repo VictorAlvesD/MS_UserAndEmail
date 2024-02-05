@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "TB_Telephone")
 public class TelephoneModel {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String number;

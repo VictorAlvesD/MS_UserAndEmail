@@ -3,10 +3,11 @@ package com.microservices.user.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "TB_Adress")
-public class AdressModel {
+@Table(name = "TB_Address")
+public class AddressModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String cep;
