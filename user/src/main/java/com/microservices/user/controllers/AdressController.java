@@ -19,8 +19,6 @@ public class AdressController {
 
     @PostMapping("/address")
     public ResponseEntity<AddressModel> saveAddress(@RequestBody @Valid AddressDto addressDto) {
-        AddressModel addressModel = new AddressModel();
-        BeanUtils.copyProperties(addressDto, addressModel);
-        return ResponseEntity.status(HttpStatus.CREATED).body(addressService.saveAddress(addressModel));
+        return ResponseEntity.status(HttpStatus.CREATED).body(addressService.saveAddress(addressDto));
     }
 }

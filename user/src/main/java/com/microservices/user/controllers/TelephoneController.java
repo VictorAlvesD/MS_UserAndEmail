@@ -21,11 +21,6 @@ public class TelephoneController {
 
     @PostMapping("/telephones")
     public ResponseEntity<TelephoneModel> saveTelephones(@RequestBody @Valid TelephoneDto telephoneDto){
-        var telephoneModel = new TelephoneModel();
-        //O método BeanUtils.copyProperties(source, target) é utilizado para copiar propriedades de um objeto para outro em Java.
-        BeanUtils.copyProperties(telephoneDto, telephoneModel);
-        telephoneModel.toString();
-        return ResponseEntity.status(HttpStatus.CREATED).body(telephoneService.saveTelephone(telephoneModel));
-
+        return ResponseEntity.status(HttpStatus.CREATED).body(telephoneService.saveTelephone(telephoneDto));
     }
 }
