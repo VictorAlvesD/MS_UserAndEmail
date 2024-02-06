@@ -2,6 +2,7 @@ package com.microservices.user.services;
 
 import com.microservices.user.dto.TelephoneDto;
 import com.microservices.user.dto.UserDto;
+import com.microservices.user.models.AddressModel;
 import com.microservices.user.models.TelephoneModel;
 import com.microservices.user.models.UserModel;
 import com.microservices.user.repositories.UserRepository;
@@ -24,7 +25,7 @@ public class UserServices {
     public UserModel saveUser(UserDto userDto) {
         var userModel = new UserModel();
 
-        //Lista de Telefones:
+        //O método .copyProperties não copia propriedades de listas por isso o trecho a seguir:
         if (!userDto.telephones().isEmpty()) {
             // Mapear os telefones DTO para modelos de telefones
             List<TelephoneModel> telephoneModelList = userDto.telephones().stream()
@@ -42,7 +43,24 @@ public class UserServices {
             userModel.setTelephones(null);
         }
 
-        //O método BeanUtils.copyProperties(source, target) é utilizado para copiar propriedades de um objeto para outro em Java.
+        if (!userDto.address().isEmpty()) {
+            // Mapear os telefones DTO para modelos de telefones
+            List<AddressModel> addressModelList = userDto.address().stream()
+                    .map(adrs -> {
+                                AddressModel address = new AddressModel();
+                                address.setCep(adrs.cep());
+                                address.setNumber(adrs.number());
+                                address.setComplemet(adrs.complemet());
+                                return address;
+                            }
+                    ).collect(Collectors.toList());
+            // Configurar a lista de telefones do userModel
+            userModel.setAddress(addressModelList);
+        } else {
+            // Se a lista de telefones estiver vazia, definimos como null
+            userModel.setAddress(null);
+        }
+
         BeanUtils.copyProperties(userDto, userModel);
         return userRepository.save(userModel);
     }

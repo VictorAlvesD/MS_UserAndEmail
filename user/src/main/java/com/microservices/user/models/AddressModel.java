@@ -2,13 +2,15 @@ package com.microservices.user.models;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "TB_Address")
 public class AddressModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private UUID id;
 
     private String cep;
 
@@ -20,10 +22,6 @@ public class AddressModel {
     @JoinColumn(name = "User_id")
     private UserModel user;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public UserModel getUser() {
         return user;
     }
@@ -32,8 +30,12 @@ public class AddressModel {
         this.user = user;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getCep() {

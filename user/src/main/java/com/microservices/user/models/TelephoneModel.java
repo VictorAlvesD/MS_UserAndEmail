@@ -2,34 +2,28 @@ package com.microservices.user.models;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "TB_Telephone")
 public class TelephoneModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private UUID id;
 
     private String number;
 
     private String ddd;
 
-    public UserModel getUser() {
-        return user;
-    }
-
-    public void setUser(UserModel user) {
-        this.user = user;
-    }
-
     @ManyToOne
     @JoinColumn(name = "User_id")
     private UserModel user;
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
