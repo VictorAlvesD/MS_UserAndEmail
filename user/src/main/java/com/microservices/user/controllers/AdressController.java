@@ -3,6 +3,7 @@ package com.microservices.user.controllers;
 import com.microservices.user.dto.AddressDto;
 import com.microservices.user.models.AddressModel;
 import com.microservices.user.services.AddressService;
+import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,7 @@ public class AdressController {
     private AddressService addressService;
 
     @PostMapping("/address")
-    public ResponseEntity<AddressModel> saveAddress(@RequestBody AddressDto addressDto) {
+    public ResponseEntity<AddressModel> saveAddress(@RequestBody @Valid AddressDto addressDto) {
         AddressModel addressModel = new AddressModel();
         BeanUtils.copyProperties(addressDto, addressModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(addressService.saveAddress(addressModel));
