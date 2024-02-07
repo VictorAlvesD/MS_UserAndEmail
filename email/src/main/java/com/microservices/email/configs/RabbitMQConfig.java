@@ -1,5 +1,7 @@
 package com.microservices.email.configs;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,5 +18,15 @@ public class RabbitMQConfig {
         return new Queue(queue, true); //
         // O construtor da classe Queue recebe dois parâmetros: o nome da fila e um booleano que indica se a fila
         // é durável, ou seja se o broker caí e voltar essa fila vai ser preservada
+    }
+
+    // O objetivo principal desse metodo é configurar um conversor de mensagens para JSON.
+    @Bean
+    public Jackson2JsonMessageConverter messageConverter() {
+        // Cria uma nova instância de ObjectMapper para configurar a conversão de JSON
+        var objectMapper = new ObjectMapper();
+        // Retorna uma nova instância de Jackson2JsonMessageConverter,
+        // configurando-o para usar o ObjectMapper definido acima para a conversão de mensagens
+        return new Jackson2JsonMessageConverter(objectMapper);
     }
 }
